@@ -64,7 +64,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom">
-          <span>© {year} Shawahiq Real Estate. All rights reserved.</span>
+          <span>© {year} Preview Shawahiq Real Estate. All rights reserved.</span>
           <span>RERA registered · Dubai, UAE</span>
         </div>
       </div>
