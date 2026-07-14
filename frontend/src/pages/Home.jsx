@@ -242,6 +242,7 @@ const Home = () => {
           </div>
         </div>
         <div className="why-visual">
+          <div className="why-visual-overlay" />
           <div className="horizon-line" />
         </div>
       </section>

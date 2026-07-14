@@ -489,11 +489,17 @@
 }
 
 .why-visual {
-  background: linear-gradient(160deg, var(--navy), var(--deep-blue) 55%, var(--sky));
+  background: url('/why-us.jpg') center/cover no-repeat, linear-gradient(160deg, var(--navy), var(--deep-blue) 55%, var(--sky));
   border-radius: 4px;
   height: 480px;
   position: relative;
   overflow: hidden;
+}
+
+.why-visual-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(32,32,32,0.15), rgba(32,32,32,0.55));
 }
 
 .why-visual .horizon-line {
