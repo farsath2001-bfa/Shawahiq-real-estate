@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { ArrowRight, Navigation } from 'lucide-react';
 import { FacebookIcon, InstagramIcon, LinkedinIcon, YoutubeIcon, WhatsappIcon } from '../shared/SocialIcons';
 import './Footer.css';
 
@@ -14,6 +15,16 @@ const Footer = () => {
             <p className="footer-tagline">
               Luxury · Trust · Investment. Dubai off-plan and ready properties, backed by transparent pricing.
             </p>
+            <a
+              href="https://wa.me/971561119233"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-whatsapp-cta"
+            >
+              <WhatsappIcon />
+              Chat with us
+              <ArrowRight size={14} strokeWidth={2} />
+            </a>
           </div>
 
           <div className="footer-col">
@@ -40,7 +51,18 @@ const Footer = () => {
 
         {/* MAP */}
         <div className="footer-map-section">
-          <h4>Find Us</h4>
+          <div className="footer-map-header">
+            <h4>Find Us</h4>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Business+Bay+Dubai+UAE"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-directions-link"
+            >
+              <Navigation size={13} strokeWidth={2} />
+              Get Directions
+            </a>
+          </div>
           <div className="footer-map-wrap">
             <iframe
               title="Office location — Business Bay, Dubai"
@@ -64,7 +86,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom">
-          <span>© {year} Preview Shawahiq Real Estate. All rights reserved.</span>
+          <span>© {year}  Shawahiq Real Estate. All rights reserved By Farsath.</span>
           <span>RERA registered · Dubai, UAE</span>
         </div>
       </div>
