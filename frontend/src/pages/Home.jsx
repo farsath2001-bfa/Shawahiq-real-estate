@@ -4,6 +4,8 @@ import { ShieldCheck, TrendingUp, Users, MapPin, Quote } from 'lucide-react';
 import api from '../api/api';
 import Seo from '../components/shared/Seo';
 import HeroSlider from '../components/shared/HeroSlider';
+import Reveal from '../components/shared/Reveal';
+import Counter from '../components/shared/Counter';
 import './Home.css';
 
 const formatPrice = (num) => {
@@ -102,15 +104,19 @@ const Home = () => {
         </div>
         <div className="hero-stats">
           <div className="hero-stat">
-            <span className="num">{projects.length > 0 ? `${projects.length}+` : '—'}</span>
+            <span className="num">
+              {projects.length > 0 ? <><Counter end={projects.length} />+</> : '—'}
+            </span>
             <span className="label">Properties</span>
           </div>
           <div className="hero-stat">
-            <span className="num">{communities.length || '—'}</span>
+            <span className="num">
+              {communities.length > 0 ? <Counter end={communities.length} /> : '—'}
+            </span>
             <span className="label">Communities</span>
           </div>
           <div className="hero-stat">
-            <span className="num">2007</span>
+            <span className="num"><Counter end={2007} duration={1600} separator={false} /></span>
             <span className="label">Established</span>
           </div>
         </div>
@@ -127,6 +133,7 @@ const Home = () => {
       </section>
 
       {/* FEATURED PROJECTS */}
+      <Reveal>
       <section className="section">
         <div className="section-header">
           <div>
@@ -172,8 +179,10 @@ const Home = () => {
           ))}
         </div>
       </section>
+      </Reveal>
 
       {/* COMMUNITIES */}
+      <Reveal>
       <section className="section communities-section">
         <div className="section-header">
           <div>
@@ -201,8 +210,10 @@ const Home = () => {
           ))}
         </div>
       </section>
+      </Reveal>
 
       {/* TESTIMONIALS */}
+      <Reveal>
       <section className="testimonials-section">
         <div className="section-header testimonials-header">
           <div>
@@ -223,8 +234,10 @@ const Home = () => {
           ))}
         </div>
       </section>
+      </Reveal>
 
       {/* WHY US */}
+      <Reveal>
       <section className="section why-section">
         <div>
           <span className="section-eyebrow">Why us</span>
@@ -246,14 +259,17 @@ const Home = () => {
           <div className="horizon-line" />
         </div>
       </section>
+      </Reveal>
 
       {/* CTA */}
+      <Reveal>
       <section className="cta-section">
         <div className="cta-pattern" />
         <h2>Ready to find your next address?</h2>
         <p>Tell us what you're looking for, and we'll match you with the right project.</p>
         <Link to="/contact"><button className="btn-primary">Get in Touch</button></Link>
       </section>
+      </Reveal>
     </div>
   );
 };

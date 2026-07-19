@@ -1,8 +1,42 @@
 import { useState } from 'react';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { WhatsappIcon } from '../components/shared/SocialIcons';
+import Faq from '../components/shared/Faq';
 import api from '../api/api';
 import Seo from '../components/shared/Seo';
 import './Contact.css';
+
+const isOfficeOpen = () => {
+  const now = new Date();
+  const day = now.getDay(); // 0 = Sunday, 4 = Thursday
+  const hour = now.getHours();
+  const isWorkday = day >= 0 && day <= 4; // Sunday–Thursday, UAE work week
+  const isWorkHour = hour >= 9 && hour < 18;
+  return isWorkday && isWorkHour;
+};
+
+const FAQ_ITEMS = [
+  {
+    question: 'Is it safe to buy off-plan property in Dubai?',
+    answer: "Yes, provided the developer is RERA-registered and the project has an escrow account, which is legally required in Dubai. We only list projects that meet these requirements, and every listing here is verified against its actual master plan before it goes live.",
+  },
+  {
+    question: 'What is a payment plan, and how does it work?',
+    answer: 'A payment plan spreads the purchase price across construction milestones instead of one lump sum — for example 20% on booking, then further installments tied to progress, with the balance due on handover. Each project page shows its exact payment schedule.',
+  },
+  {
+    question: 'Do you charge buyers any fees?',
+    answer: 'No — our listings are provided directly, and our fee (if any, depending on the transaction) is covered by the developer, not the buyer. We\'ll always be upfront about this before you commit to anything.',
+  },
+  {
+    question: 'Can international buyers purchase property in Dubai?',
+    answer: 'Yes. Dubai allows 100% foreign ownership in designated freehold areas, which covers the vast majority of our listings. We can guide you through the specific requirements for your nationality.',
+  },
+  {
+    question: 'What happens after I submit an enquiry?',
+    answer: "Someone from our team reviews your enquiry and reaches out within one business day — usually sooner. We'll confirm availability, share the full payment schedule, and answer any specific questions before you decide anything.",
+  },
+];
 
 const Contact = () => {
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
@@ -75,6 +109,20 @@ const Contact = () => {
         </div>
 
         <div className="contact-info-col">
+          <a
+            href="https://wa.me/971561119233"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="contact-whatsapp-card"
+          >
+            <div className="contact-whatsapp-icon"><WhatsappIcon /></div>
+            <div>
+              <h3>Chat on WhatsApp</h3>
+              <p>Usually replies within minutes</p>
+            </div>
+            <span className={`contact-status-dot ${isOfficeOpen() ? 'online' : 'offline'}`} />
+          </a>
+
           <div className="contact-info-card">
             <MapPin size={18} strokeWidth={1.75} className="contact-info-icon" />
             <div>
@@ -101,8 +149,19 @@ const Contact = () => {
             <div>
               <h3>Hours</h3>
               <p>Sunday – Thursday, 9am – 6pm</p>
+              <span className={`contact-open-label ${isOfficeOpen() ? 'open' : 'closed'}`}>
+                {isOfficeOpen() ? 'Open now' : 'Closed now'}
+              </span>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="contact-faq-section">
+        <div className="contact-faq-inner">
+          <span className="contact-eyebrow">Common Questions</span>
+          <h2>Frequently asked questions</h2>
+          <Faq items={FAQ_ITEMS} />
         </div>
       </section>
     </div>

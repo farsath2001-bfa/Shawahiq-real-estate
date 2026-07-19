@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
 import { Eye, Home, Clock } from 'lucide-react';
 import Seo from '../components/shared/Seo';
+import Counter from '../components/shared/Counter';
 import './About.css';
 
 const STATS = [
-  { num: '2007', label: 'Established' },
-  { num: '120+', label: 'Properties Delivered' },
-  { num: '18', label: 'Communities' },
-  { num: '4,000+', label: 'Happy Residents' },
+  { end: 2007, suffix: '', separator: false, label: 'Established' },
+  { end: 120, suffix: '+', separator: false, label: 'Properties Delivered' },
+  { end: 18, suffix: '', separator: false, label: 'Communities' },
+  { end: 4000, suffix: '+', separator: true, label: 'Happy Residents' },
 ];
 
 const VALUES = [
@@ -48,27 +49,55 @@ const About = () => {
       <section className="about-stats">
         {STATS.map((s) => (
           <div className="about-stat" key={s.label}>
-            <span className="about-stat-num">{s.num}</span>
+            <span className="about-stat-num">
+              <Counter end={s.end} suffix={s.suffix} separator={s.separator} />
+            </span>
             <span className="about-stat-label">{s.label}</span>
           </div>
         ))}
       </section>
 
       <section className="about-story">
-        <span className="section-eyebrow">Our Story</span>
-        <h2>Nearly two decades in Dubai's skyline</h2>
-        <p>
-          Since 2007, we've developed residential and mixed-use communities across
-          Dubai's most sought-after locations. What started as a single waterfront
-          project has grown into a portfolio spanning marina towers, villa
-          communities, and hillside residences — always with the same principle:
-          a home is judged by the neighborhood around it, not just the building itself.
-        </p>
-        <p>
-          We're RERA registered and work directly with Dubai's master developers,
-          which means every project on this site is verified against its actual
-          master plan and construction schedule — not a marketing brochure.
-        </p>
+        <div className="about-story-text">
+          <span className="section-eyebrow">Our Story</span>
+          <h2>Nearly two decades in Dubai's skyline</h2>
+          <p>
+            Since 2007, we've developed residential and mixed-use communities across
+            Dubai's most sought-after locations. What started as a single waterfront
+            project has grown into a portfolio spanning marina towers, villa
+            communities, and hillside residences — always with the same principle:
+            a home is judged by the neighborhood around it, not just the building itself.
+          </p>
+          <p>
+            We're RERA registered and work directly with Dubai's master developers,
+            which means every project on this site is verified against its actual
+            master plan and construction schedule — not a marketing brochure.
+          </p>
+        </div>
+        <div className="about-story-image" style={{ backgroundImage: `url('/about-story.jpg')` }} />
+      </section>
+
+      <section className="about-timeline">
+        <span className="section-eyebrow">Milestones</span>
+        <h2>How we got here</h2>
+        <div className="about-timeline-track">
+          <div className="about-timeline-item">
+            <span className="about-timeline-year">2007</span>
+            <p>First waterfront project broke ground in Dubai</p>
+          </div>
+          <div className="about-timeline-item">
+            <span className="about-timeline-year">2014</span>
+            <p>Expanded into villa communities and master-planned neighborhoods</p>
+          </div>
+          <div className="about-timeline-item">
+            <span className="about-timeline-year">2020</span>
+            <p>Crossed 100 residential handovers across Dubai</p>
+          </div>
+          <div className="about-timeline-item">
+            <span className="about-timeline-year">Today</span>
+            <p>Active across 10+ communities with transparent, verified listings</p>
+          </div>
+        </div>
       </section>
 
       <section className="about-values">

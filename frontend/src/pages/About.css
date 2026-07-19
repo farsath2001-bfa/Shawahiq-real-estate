@@ -111,27 +111,78 @@
   max-width: 1240px;
   margin: 0 auto;
   padding: 100px 40px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 64px;
+  align-items: center;
 }
 
-.about-story h2 {
+.about-story-text h2 {
   font-family: 'Fraunces', serif;
   font-size: clamp(1.8rem, 3vw, 2.4rem);
   font-weight: 500;
-  max-width: 640px;
   margin: 0 0 36px;
   line-height: 1.25;
 }
 
-.about-story p {
+.about-story-text p {
   color: #4A5568;
   line-height: 1.8;
   font-size: 16px;
-  max-width: 680px;
   margin: 0 0 24px;
 }
 
-.about-story p:last-child {
+.about-story-text p:last-child {
   margin-bottom: 0;
+}
+
+.about-story-image {
+  height: 420px;
+  border-radius: 4px;
+  background: linear-gradient(160deg, #202020, #2B2B28 55%, #A67C3D);
+  background-size: cover;
+  background-position: center;
+}
+
+/* ---------- TIMELINE ---------- */
+.about-timeline {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 40px 100px;
+}
+
+.about-timeline h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 500;
+  margin: 0 0 40px;
+}
+
+.about-timeline-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+.about-timeline-item {
+  border-top: 3px solid #D4A843;
+  padding-top: 18px;
+}
+
+.about-timeline-year {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #202020;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.about-timeline-item p {
+  color: #6E6A5F;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
 }
 
 /* ---------- VALUES ---------- */
@@ -257,6 +308,18 @@
   .about-values-grid {
     grid-template-columns: 1fr;
   }
+  .about-story {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .about-story-image {
+    height: 280px;
+    order: -1;
+  }
+  .about-timeline-track {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 32px;
+  }
   .about-story, .about-values, .about-cta {
     padding-top: 72px;
     padding-bottom: 72px;
@@ -273,10 +336,14 @@
   .about-hero-content,
   .about-stats,
   .about-story,
+  .about-timeline,
   .about-values,
   .about-cta {
     padding-left: 24px;
     padding-right: 24px;
+  }
+  .about-timeline-track {
+    grid-template-columns: 1fr;
   }
   .about-stats {
     padding-top: 56px;

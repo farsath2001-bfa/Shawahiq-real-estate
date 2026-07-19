@@ -140,6 +140,13 @@
   max-width: 460px;
 }
 
+.community-row-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
 .community-row-location {
   display: flex;
   align-items: center;
@@ -150,6 +157,15 @@
 
 .community-row-location svg {
   color: #D4A843;
+}
+
+.community-row-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: #202020;
+  background: #EEE9DD;
+  padding: 3px 10px;
+  border-radius: 20px;
 }
 
 .community-row-count {

@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Tag, BedDouble, CalendarCheck, CheckCircle2, Phone } from 'lucide-react';
 import api from '../api/api';
 import Seo from '../components/shared/Seo';
+import Lightbox from '../components/shared/Lightbox';
 import './ProjectDetail.css';
 
 const statusLabel = { 'off-plan': 'Off-Plan', ready: 'Ready', upcoming: 'Upcoming' };
@@ -15,6 +16,7 @@ const ProjectDetail = () => {
   const [notFound, setNotFound] = useState(false);
   const [activeFloorPlan, setActiveFloorPlan] = useState(0);
   const [activeImage, setActiveImage] = useState(0);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -110,8 +112,9 @@ const ProjectDetail = () => {
       {/* GALLERY */}
       {project.images?.length > 0 && (
         <section className="pd-gallery">
-          <div className="pd-gallery-main">
+          <div className="pd-gallery-main" onClick={() => setLightboxIndex(activeImage)}>
             <img src={project.images[activeImage]} alt={`${project.name} — view ${activeImage + 1}`} />
+            <span className="pd-gallery-expand-hint">Click to enlarge</span>
           </div>
           {project.images.length > 1 && (
             <div className="pd-gallery-thumbs">
@@ -129,6 +132,13 @@ const ProjectDetail = () => {
           )}
         </section>
       )}
+
+      <Lightbox
+        images={project.images || []}
+        activeIndex={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onNavigate={(i) => { setLightboxIndex(i); setActiveImage(i); }}
+      />
 
       <div className="pd-body">
         {/* MAIN COLUMN */}

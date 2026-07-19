@@ -3,18 +3,30 @@ import { Link } from 'react-router-dom';
 import { MapPin } from 'lucide-react';
 import api from '../api/api';
 import Seo from '../components/shared/Seo';
+import Counter from '../components/shared/Counter';
 import './Communities.css';
 
 const Communities = () => {
   const [communities, setCommunities] = useState([]);
+  const [projectCounts, setProjectCounts] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
     const load = async () => {
       try {
-        const { data } = await api.get('/communities');
-        setCommunities(data);
+        const [communitiesRes, projectsRes] = await Promise.all([
+          api.get('/communities'),
+          api.get('/projects'),
+        ]);
+        setCommunities(communitiesRes.data);
+
+        const counts = {};
+        projectsRes.data.forEach((p) => {
+          const communityId = p.community?._id || p.community;
+          if (communityId) counts[communityId] = (counts[communityId] || 0) + 1;
+        });
+        setProjectCounts(counts);
       } catch (err) {
         setError('Could not load communities. Check that the backend server is running.');
       } finally {
@@ -37,7 +49,9 @@ const Communities = () => {
           <p>Every development grouped by the neighborhood it belongs to — explore each community's character before you look at individual units.</p>
           <div className="communities-hero-stats">
             <div className="communities-hero-stat">
-              <span className="num">{communities.length || '—'}</span>
+              <span className="num">
+                {communities.length > 0 ? <Counter end={communities.length} /> : '—'}
+              </span>
               <span className="label">Communities</span>
             </div>
             <div className="communities-hero-stat">
@@ -68,10 +82,15 @@ const Communities = () => {
               <div className="community-row-content">
                 <h2>{c.name}</h2>
                 {c.description && <p>{c.description}</p>}
-                <span className="community-row-location">
-                  <MapPin size={14} strokeWidth={1.75} />
-                  Dubai, UAE
-                </span>
+                <div className="community-row-meta">
+                  <span className="community-row-location">
+                    <MapPin size={14} strokeWidth={1.75} />
+                    Dubai, UAE
+                  </span>
+                  <span className="community-row-count">
+                    {projectCounts[c._id] || 0} {projectCounts[c._id] === 1 ? 'project' : 'projects'}
+                  </span>
+                </div>
               </div>
               <span className="community-row-arrow">→</span>
             </div>
