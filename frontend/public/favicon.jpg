@@ -1,6 +1,0 @@
-<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-  <rect width="64" height="64" rx="10" fill="#202020"/>
-  <text x="32" y="44" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="600"
-        text-anchor="middle" fill="#D4A843">S</text>
-  <path d="M14 46 Q32 40 50 46" stroke="#D4A843" stroke-width="2" fill="none" stroke-linecap="round"/>
-</svg>
