@@ -1,8 +1,9 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { BedDouble } from 'lucide-react';
+import { BedDouble, Heart } from 'lucide-react';
 import api from '../api/api';
 import Seo from '../components/shared/Seo';
+import { useWishlist } from '../context/WishlistContext';
 import './Projects.css';
 
 const STATUSES = ['All', 'off-plan', 'ready', 'upcoming'];
@@ -16,6 +17,7 @@ const formatPrice = (num) => {
 const statusLabel = { 'off-plan': 'Off-Plan', ready: 'Ready', upcoming: 'Upcoming' };
 
 const Projects = () => {
+  const { isSaved, toggle } = useWishlist();
   const [allProjects, setAllProjects] = useState([]);
   const [communities, setCommunities] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -136,6 +138,13 @@ const Projects = () => {
                         style={project.images?.[0] ? { backgroundImage: `url('${project.images[0]}')` } : undefined}
                       >
                         <span className="project-status">{statusLabel[project.status] || project.status}</span>
+                        <button
+                          className={`project-card-heart ${isSaved(project._id) ? 'saved' : ''}`}
+                          onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggle(project._id); }}
+                          aria-label={isSaved(project._id) ? 'Remove from wishlist' : 'Save to wishlist'}
+                        >
+                          <Heart size={15} strokeWidth={2} fill={isSaved(project._id) ? 'currentColor' : 'none'} />
+                        </button>
                       </div>
                       <div className="project-card-body">
                         <span className="project-community">{project.community?.name || 'Dubai'}</span>

@@ -1,0 +1,126 @@
+.search-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(20,20,20,0.7);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 100px 20px;
+  animation: search-modal-fade 0.15s ease;
+}
+
+@keyframes search-modal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.search-modal {
+  background: #FFFFFF;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 560px;
+  max-height: 70vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.search-modal-input-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid #E7E2D6;
+  color: #6E6A5F;
+}
+
+.search-modal-input-row input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  color: #202020;
+}
+
+.search-modal-close {
+  background: none;
+  border: none;
+  color: #6E6A5F;
+  cursor: pointer;
+  display: flex;
+  padding: 4px;
+}
+
+.search-modal-close:hover {
+  color: #202020;
+}
+
+.search-modal-results {
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+.search-modal-status {
+  padding: 32px 20px;
+  text-align: center;
+  color: #6E6A5F;
+  font-size: 14px;
+  margin: 0;
+}
+
+.search-modal-group {
+  padding: 8px 0;
+}
+
+.search-modal-group-label {
+  display: block;
+  padding: 8px 20px 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #A67C3D;
+}
+
+.search-modal-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: #202020;
+  transition: background 0.15s ease;
+}
+
+.search-modal-item:hover {
+  background: #F5F1E8;
+}
+
+.search-modal-item svg {
+  color: #D4A843;
+  flex-shrink: 0;
+}
+
+.search-modal-item > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-modal-item-title {
+  font-size: 14.5px;
+  font-weight: 600;
+}
+
+.search-modal-item-sub {
+  font-size: 12.5px;
+  color: #6E6A5F;
+}
+
+@media (max-width: 600px) {
+  .search-modal-overlay {
+    padding: 60px 12px;
+  }
+}

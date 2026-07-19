@@ -76,7 +76,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom">
-          <span>© {year} Shawahiq Real Estate L.L.C. All rights reserved.</span>
+          <span>© {year} Shawahiq Real Estate L.L.C. Design And Develop by Farsath.</span>
         </div>
       </div>
     </footer>

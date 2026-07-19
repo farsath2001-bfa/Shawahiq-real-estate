@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Tag, BedDouble, CalendarCheck, CheckCircle2, Phone } from 'lucide-react';
+import { Tag, BedDouble, CalendarCheck, CheckCircle2, Phone, Heart } from 'lucide-react';
 import api from '../api/api';
 import Seo from '../components/shared/Seo';
 import Lightbox from '../components/shared/Lightbox';
+import { useWishlist } from '../context/WishlistContext';
 import './ProjectDetail.css';
 
 const statusLabel = { 'off-plan': 'Off-Plan', ready: 'Ready', upcoming: 'Upcoming' };
@@ -11,6 +12,7 @@ const formatPrice = (num) => `AED ${(num || 0).toLocaleString()}`;
 
 const ProjectDetail = () => {
   const { slug } = useParams();
+  const { isSaved, toggle } = useWishlist();
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -104,7 +106,16 @@ const ProjectDetail = () => {
             <span className="pd-breadcrumb-current">{project.name}</span>
           </nav>
           <span className="pd-status">{statusLabel[project.status] || project.status}</span>
-          <h1>{project.name}</h1>
+          <div className="pd-title-row">
+            <h1>{project.name}</h1>
+            <button
+              className={`pd-wishlist-btn ${isSaved(project._id) ? 'saved' : ''}`}
+              onClick={() => toggle(project._id)}
+              aria-label={isSaved(project._id) ? 'Remove from wishlist' : 'Save to wishlist'}
+            >
+              <Heart size={20} strokeWidth={2} fill={isSaved(project._id) ? 'currentColor' : 'none'} />
+            </button>
+          </div>
           <span className="pd-community">{project.community?.name || 'Dubai'}, Dubai</span>
         </div>
       </section>
