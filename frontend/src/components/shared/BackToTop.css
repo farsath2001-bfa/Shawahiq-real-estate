@@ -1,0 +1,44 @@
+.back-to-top {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 150;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #202020;
+  border: 1px solid #D4A843;
+  color: #D4A843;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  animation: back-to-top-pop 0.25s ease;
+}
+
+@keyframes back-to-top-pop {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.back-to-top:hover {
+  background: #D4A843;
+  color: #202020;
+  transform: translateY(-2px);
+}
+
+.back-to-top:focus-visible {
+  outline: 2px solid #D4A843;
+  outline-offset: 3px;
+}
+
+@media (max-width: 960px) {
+  .back-to-top {
+    bottom: 88px;
+    left: 16px;
+    width: 40px;
+    height: 40px;
+  }
+}
