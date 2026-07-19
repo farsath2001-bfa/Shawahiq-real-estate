@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Tag, BedDouble, CalendarCheck, CheckCircle2 } from 'lucide-react';
+import { Tag, BedDouble, CalendarCheck, CheckCircle2, Phone } from 'lucide-react';
 import api from '../api/api';
 import Seo from '../components/shared/Seo';
 import './ProjectDetail.css';
@@ -88,7 +88,19 @@ const ProjectDetail = () => {
         />
         <div className="pd-hero-overlay" />
         <div className="pd-hero-content">
-          <Link to="/projects" className="pd-back-link">← All Projects</Link>
+          <nav className="pd-breadcrumb" aria-label="Breadcrumb">
+            <Link to="/">Home</Link>
+            <span>/</span>
+            <Link to="/projects">Projects</Link>
+            {project.community?.name && (
+              <>
+                <span>/</span>
+                <Link to={`/communities/${project.community.slug || ''}`}>{project.community.name}</Link>
+              </>
+            )}
+            <span>/</span>
+            <span className="pd-breadcrumb-current">{project.name}</span>
+          </nav>
           <span className="pd-status">{statusLabel[project.status] || project.status}</span>
           <h1>{project.name}</h1>
           <span className="pd-community">{project.community?.name || 'Dubai'}, Dubai</span>
@@ -220,7 +232,7 @@ const ProjectDetail = () => {
         </div>
 
         {/* SIDEBAR */}
-        <aside className="pd-sidebar">
+        <aside className="pd-sidebar" id="pd-enquiry">
           <div className="pd-enquiry-card">
             <h3>Interested in this project?</h3>
             <p>Leave your details and our team will get back to you with availability and pricing.</p>
@@ -257,6 +269,14 @@ const ProjectDetail = () => {
             <a href="tel:+971000000000" className="pd-whatsapp-link">Or call +971 00 000 0000</a>
           </div>
         </aside>
+      </div>
+
+      {/* STICKY MOBILE CTA */}
+      <div className="pd-mobile-cta">
+        <a href="#pd-enquiry" className="pd-mobile-cta-btn">Request Details</a>
+        <a href="tel:+971000000000" className="pd-mobile-cta-call" aria-label="Call us">
+          <Phone size={20} strokeWidth={2} />
+        </a>
       </div>
     </div>
   );

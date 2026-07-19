@@ -106,12 +106,17 @@ const AdminDashboard = () => {
       const { data } = await api.post('/projects/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      setUploadedImageUrls(data.urls);
+      setUploadedImageUrls((prev) => [...prev, ...data.urls]);
+      setImageFiles([]);
     } catch (err) {
       setUploadError(err.response?.data?.message || 'Upload failed.');
     } finally {
       setUploading(false);
     }
+  };
+
+  const handleRemoveImage = (urlToRemove) => {
+    setUploadedImageUrls((prev) => prev.filter((url) => url !== urlToRemove));
   };
 
   // ---------- PROJECT CRUD ----------
@@ -393,7 +398,7 @@ const AdminDashboard = () => {
             <div className="admin-field">
               <label htmlFor="images">Project Images</label>
               <input id="images" type="file" accept="image/*" multiple onChange={handleImageSelect} />
-              {imageFiles.length > 0 && uploadedImageUrls.length === 0 && (
+              {imageFiles.length > 0 && (
                 <button
                   type="button"
                   className="admin-btn-outline admin-upload-btn"
@@ -407,7 +412,17 @@ const AdminDashboard = () => {
               {uploadedImageUrls.length > 0 && (
                 <div className="admin-image-preview-grid">
                   {uploadedImageUrls.map((url) => (
-                    <img src={url} alt="Uploaded preview" key={url} className="admin-image-preview" />
+                    <div className="admin-image-preview-wrap" key={url}>
+                      <img src={url} alt="Uploaded preview" className="admin-image-preview" />
+                      <button
+                        type="button"
+                        className="admin-image-remove-btn"
+                        onClick={() => handleRemoveImage(url)}
+                        aria-label="Remove image"
+                      >
+                        ×
+                      </button>
+                    </div>
                   ))}
                 </div>
               )}
@@ -488,7 +503,17 @@ const AdminDashboard = () => {
               {communityImageError && <div className="admin-error">{communityImageError}</div>}
               {uploadedCommunityImage && (
                 <div className="admin-image-preview-grid">
-                  <img src={uploadedCommunityImage} alt="Uploaded preview" className="admin-image-preview" />
+                  <div className="admin-image-preview-wrap">
+                    <img src={uploadedCommunityImage} alt="Uploaded preview" className="admin-image-preview" />
+                    <button
+                      type="button"
+                      className="admin-image-remove-btn"
+                      onClick={() => setUploadedCommunityImage('')}
+                      aria-label="Remove image"
+                    >
+                      ×
+                    </button>
+                  </div>
                 </div>
               )}
             </div>

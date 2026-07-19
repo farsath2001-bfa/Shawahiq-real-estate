@@ -52,6 +52,34 @@
   color: #FFFFFF;
 }
 
+.pd-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+.pd-breadcrumb a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.pd-breadcrumb a:hover {
+  color: #D4A843;
+}
+
+.pd-breadcrumb span {
+  color: rgba(255,255,255,0.4);
+}
+
+.pd-breadcrumb-current {
+  color: #FFFFFF !important;
+  font-weight: 600;
+}
+
 .pd-status {
   display: inline-block;
   background: #D4A843;
@@ -378,6 +406,7 @@
 .pd-sidebar {
   position: sticky;
   top: 108px;
+  scroll-margin-top: 120px;
 }
 
 .pd-enquiry-card {
@@ -499,5 +528,54 @@
   .pd-payment-row {
     grid-template-columns: 130px 1fr 40px;
     gap: 10px;
+  }
+}
+
+/* ---------- STICKY MOBILE CTA ---------- */
+.pd-mobile-cta {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .pd-mobile-cta {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 90;
+    background: #FFFFFF;
+    border-top: 1px solid #E7E2D6;
+    padding: 12px 16px;
+    gap: 10px;
+    box-shadow: 0 -4px 20px rgba(32,32,32,0.1);
+  }
+
+  .pd-mobile-cta-btn {
+    flex: 1;
+    background: #202020;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 14px;
+    border-radius: 6px;
+    font-size: 14.5px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .pd-mobile-cta-call {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    background: #D4A843;
+    color: #202020;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pd-body {
+    padding-bottom: 100px;
   }
 }
